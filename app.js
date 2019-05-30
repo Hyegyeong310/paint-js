@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 const colors = document.getElementsByClassName('jsColor');
 const range = document.getElementById('jsRange');
 const mode = document.getElementById('jsMode');
+const reset = document.getElementById('jsReset');
 const saveBtn = document.getElementById('jsSave');
 
 const INITIAL_COLOR = '#2c2c2c';
@@ -12,8 +13,7 @@ canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
 
 // background-color setting white
-ctx.fillStyle = '#fff';
-ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+handleReset();
 
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
@@ -97,6 +97,11 @@ function getTimestamp() {
   return `${year}${month}${day}${hour}${minute}${second}`.substring(2);
 }
 
+function handleReset() {
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+}
+
 if (canvas) {
   canvas.addEventListener('mousemove', onMouseMove);
   canvas.addEventListener('mousedown', startPainting);
@@ -118,6 +123,10 @@ if (range) {
 
 if (mode) {
   mode.addEventListener('click', handleModeClick);
+}
+
+if (reset) {
+  reset.addEventListener('click', handleReset);
 }
 
 if (saveBtn) {
