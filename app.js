@@ -76,9 +76,25 @@ function handleCM(event) {
 function handleSaveClick() {
   const image = canvas.toDataURL();
   const link = document.createElement('a');
+  const timestamp = getTimestamp();
   link.href = image;
-  link.download = 'PaintJS[🎨]';
+  link.download = `PaintJS[🎨]_${timestamp}`;
   link.click();
+}
+
+function pad2(n) {
+  return n < 10 ? `0${n}` : n;
+}
+
+function getTimestamp() {
+  const date = new Date();
+  const year = date.getFullYear(),
+    month = pad2(date.getMonth() + 1),
+    day = pad2(date.getDate()),
+    hour = pad2(date.getHours()),
+    minute = pad2(date.getMinutes()),
+    second = pad2(date.getSeconds());
+  return `${year}${month}${day}${hour}${minute}${second}`.substring(2);
 }
 
 if (canvas) {
